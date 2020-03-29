@@ -14,12 +14,7 @@ Maria IDRISSI
 
 ## Livrables
 
-* README.md
-* NDC
-* MCD
-* MLD non-relationnel
-* BBD : base de données, données de test, questions
-* Application Python
+Les livrables et les conditions sont détaillées dans la [Note de Clarification](/NDC.md)
 
 ## Le projet Résilience
 Le projet Résilience a pour objectif de mettre en réseau des personnes et des communautés dans une logique d'entre-aide.
