@@ -24,7 +24,7 @@ La version 2 intégrera les livrables suivants :
 ## Objectifs visés
 Les livrables devront être rendus suivant le déroulement du semestre pour NA17 (voir page Séquences sur le librecours).
 
-La page [Cadre du projet](https://librecours.net/exercice/projet/cadre.xhtml) détaille la volumétrie attendue pour un groupe de 3 :
+La page [Cadre du projet](https://librecours.net/exercice/projet/cadre.xhtml) du librecours détaille la volumétrie attendue pour un groupe de 3 :
 * 9 Classes
 * 9 Associations 1:N
 * 3 Associations N:M
@@ -37,7 +37,7 @@ Il est précisé que
 
 
 ## Acteurs du projet
-Les trois membres de l'équipe 2 NA17 
+Les trois membres de l'équipe 2 NA17 sont chargés de la réalisation : Clément DUPUIS, Matthieu GLORION, Maria IDRISSI.
 
 Stéphane Crozat est chargé de la correction.
 
