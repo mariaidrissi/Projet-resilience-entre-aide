@@ -3,7 +3,16 @@ Projet Résilience.
 
 ## Contexte
 ## Données d'entrée
+Le sujet du projet ainsi que le cadre et les détails sur les livrables sont détaillés sur le librecours :
+* https://librecours.net/exercice/projet/resilience.xhtml
+* https://librecours.net/exercice/projet/cadre.xhtml
+* https://librecours.net/exercice/projet/livrables.xhtml
+
+Des informations additionnelles précisent parfois le cadre du projet sur [l'espace d'échange Mattermost](https://team.picasoft.net/nx1718-20p/channels/na17)
+
 ## Objet du projet
+Le but du projet est d'implémenter le réseau Résilience tel que décrit [dans le README](/README.md)
+
 ## Produit du projet
 La version 1 intégrera les livrables suivants :
 * README (avec les noms des membres du groupe)
@@ -20,6 +29,7 @@ La version 2 intégrera les livrables suivants :
 * BBD : base de données, données de test, questions
 * Application Python
 
+Note : la base de données relationnelle
 
 ## Objectifs visés
 Les livrables devront être rendus suivant le déroulement du semestre pour NA17 (voir page Séquences sur le librecours).
