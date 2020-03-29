@@ -1,5 +1,5 @@
 # NOTE DE CLARIFICATION
-Projet Résilience.
+Projet Résilience NA17
 
 ## Contexte
 Dans le cadre de l'uv NA17, les groupes de projets sont chargés de travailler sur le projet Résilience qui a pour but de créer une interface d'entraide et d'échange entre plusieurs personnes et communautés. Le projet permettra à chaque personne de pouvoir rajouter une communauté à la base de données, ajouter des liens entre les personnes ou entre les communautés, gérer les informations d'une communauté. L'objectif est que les personnes puissent rajouter des services et des savoirs-faires pour s'entraider entre communauté avec ou sans contrepartie. Les personnes pourront également s'échanger des messages et renseigner leur coordonnées géographiques.  
