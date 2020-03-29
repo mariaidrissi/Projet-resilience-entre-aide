@@ -66,6 +66,8 @@ Les délais de rendu des livrables sont déjà déterminés sur la plateforme li
 Les personnes doivent pouvoir :
 * s'ajouter à la base de données 
 * créer des communautés
+* déclarer faire partie de communauté
+* déclarer avoir des liens avec d'autres personnes (unidirectionnel)
 * gérer les informations de leur communauté, agir en tant que "la communauté"
 * être contre la présence d'une personne dans la communauté
 * ajouter un savoir-faire
@@ -78,6 +80,7 @@ Les communautés doivent pouvoir :
 * ajouter un savoir-faire 
 * posséder un compte en Ğ1
 * échanger des messages avec d'autres personnes et communauté
+* déclarer avoir des liens avec d'autres communautés (unidirectionnel)
 
 
 Contraintes générales :
