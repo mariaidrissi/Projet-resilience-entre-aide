@@ -8,7 +8,7 @@ Le sujet du projet ainsi que le cadre et les détails sur les livrables sont dé
 * https://librecours.net/exercice/projet/cadre.xhtml
 * https://librecours.net/exercice/projet/livrables.xhtml
 
-Des informations additionnelles précisent parfois le cadre du projet sur [l'espace d'échange Mattermost](https://team.picasoft.net/nx1718-20p/channels/na17)
+Des informations additionnelles pourront préciser le cadre du projet sur [l'espace d'échange Mattermost](https://team.picasoft.net/nx1718-20p/channels/na17)
 
 ## Objet du projet
 Le but du projet est d'implémenter le réseau Résilience tel que décrit [dans le README](/README.md)
@@ -32,7 +32,7 @@ La version 2 intégrera les livrables suivants :
 Note : la base de données relationnelle
 
 ## Objectifs visés
-Les livrables devront être rendus suivant le déroulement du semestre pour NA17 (voir page Séquences sur le librecours).
+Les livrables devront être rendus suivant le déroulement du semestre pour NA17 (voir page [Séquences](https://librecours.net/parcours/na17/sequences.html) sur le librecours).
 
 La page [Cadre du projet](https://librecours.net/exercice/projet/cadre.xhtml) du librecours détaille la volumétrie attendue pour un groupe de 3 :
 * 9 Classes
@@ -47,7 +47,7 @@ Il est précisé que
 
 
 ## Acteurs du projet
-Les trois membres de l'équipe 2 NA17 sont chargés de la réalisation : Clément DUPUIS, Matthieu GLORION, Maria IDRISSI.
+Les trois membres de l'équipe 2 NA17 sont chargés de la réalisation : Clément DUPUIS, Matthieu GLORION et Maria IDRISSI.
 
 Stéphane Crozat est chargé de la correction.
 
@@ -55,6 +55,7 @@ Stéphane Crozat est chargé de la correction.
 Les délais de rendu des livrables sont déjà déterminés sur la plateforme librecours : 
 * Semaine 4 : note de clarification
 * Semaine 5 : projet en version 1 (readme, ndc, mcd, mld relationnel, bdd)
+* Semaine 11 : projet en version 2 (readme, ndc, mcd, mld non-relationnel, bdd, app python)
 
 
  
