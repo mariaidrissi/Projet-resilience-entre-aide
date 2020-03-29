@@ -62,7 +62,7 @@ Les délais de rendu des livrables sont déjà déterminés sur la plateforme li
 * Semaine 5 : projet en version 1 (readme, ndc, mcd, mld relationnel, bdd)
 * Semaine 11 : projet en version 2 (readme, ndc, mcd, mld non-relationnel, bdd, app python)
 
-##Contraintes liés au sujet 
+## Contraintes liés au sujet 
 Les personnes doivent pouvoir :
 * s'ajouter à la base de données 
 * créer des communautés
