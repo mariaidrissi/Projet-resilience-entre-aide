@@ -12,10 +12,6 @@ Matthieu GLORION
 
 Maria IDRISSI
 
-## Livrables
-
-Les livrables et les conditions sont détaillées dans la [Note de Clarification](/NDC.md)
-
 ## Le projet Résilience
 Le projet Résilience a pour objectif de mettre en réseau des personnes et des communautés dans une logique d'entre-aide.
 
@@ -40,3 +36,7 @@ Vue communauté : permet pour chaque personne d'avoir la liste des communautés 
 Vue message : permet de visualiser chaque message en ajoutant l'identifiant du message d'origine lorsque le message s'inscrit dans un fil historique. Par exemple si C → B → A alors on veut voir la référence à A lorsqu'on affiche C.
 
 Vue proches : permet de visualiser les communautés et personnes proches de chaque personne et communauté (à une distance inférieure à 1km)
+
+## Livrables
+
+Les livrables et les conditions sont détaillées dans la [Note de Clarification](/NDC.md)
