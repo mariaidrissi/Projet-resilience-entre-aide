@@ -31,7 +31,7 @@ La version 2 intégrera les livrables suivants :
 * BBD : base de données, données de test, questions
 * Application Python
 
-Note : la base de données relationnelle
+Note : la base de données relationnelle sera réalisée avec PostgreSQL.
 
 ## Objectifs visés
 Les livrables devront être rendus suivant le déroulement du semestre pour NA17 (voir page [Séquences](https://librecours.net/parcours/na17/sequences.html) sur le librecours).
