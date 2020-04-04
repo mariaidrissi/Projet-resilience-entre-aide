@@ -1,10 +1,10 @@
 Personne (#pseudo : string, prenom : string, nom : string, dateNaissance : date, longitude : string, latitude : string, compte=>Compte)
 
-LienPersonne (description : string, #PersonneQuiDeclare=>Personne, #PersonneConcerne=>Personne)
+LienPersonne (#id : integer, description : string, PersonneQuiDeclare=>Personne, PersonneConcerne=>Personne)
 
 Communaute (#nom : string, dateCréation : date, description : string, longitude : string, latitude : string, compte=>Compte)
 
-LienCommunaute (description : string, #CommunauteQuiDeclare=>Communaute, #CommunauteConcernee=>Communaute)
+LienCommunaute (#id : integer, description : string, CommunauteQuiDeclare=>Communaute, CommunauteConcernee=>Communaute)
 
 PersonneFaitPartieCommunaute(#Personne=>Personne, #Communauté=>Communaute, exclu : boolean)
 
