@@ -1,0 +1,45 @@
+Personne (#pseudo : string, prenom : string, nom : string, dateNaissance : date, longitude : string, latitude : string, compte=>Compte)
+
+LienPersonne (description : string, #PersonneQuiDeclare=>Personne, #PersonneConcerne=>Personne)
+
+Communaute (#nom : string, dateCréation : date, description : string, longitude : string, latitude : string, compte=>Compte)
+
+LienCommunaute (description : string, #CommunauteQuiDeclare=>Communaute, #CommunauteConcernee=>Communaute)
+
+PersonneFaitPartieCommunaute(#Personne=>Personne, #Communauté=>Communaute, exclu : boolean)
+
+PROJECTION(Communaute, nom)= PROJECTION(PersonneFaitPartieCommunaute, Communaute))
+PROJECTION(Communaute, nom)= PROJECTION(PersonneFaitPartieCommunaute, Communaute)
+
+Vote (#contre : boolean, date : date, #PersonneVotante=>Personne, #Candidat=>Personne, #CommunauteConcerné=>Communaute)
+
+SavoirFaire (degré : int[1..5], description : string)
+
+PersonneDeclareSavoirFaire(#Personne=>Personne, #SavoirFaire=>SavoirFaire)
+
+CommunauteDeclareSavoirFaire(#Communaute=>Communaute, #SavoirFaire=>SavoirFaire)
+
+Service(description : string, aDiscuter : boolean, montantG1 [0..1] : integer, PersonneQuiPropose=>Personne, SavoirFaire=>SavoirFaire, ContrePartie=>Service)
+
+Message (#id : integer, message : string, expéditeurPersonne=>Personne, expéditeurCommunaute=>Communaute, destinatairePersonne=>Personne, destinataireCommunaute=>Communaute,ref=>Message, premièreRef=>Message)
+
+Intersection(Restriction(Message,expéditeurPersonne not NULL), Restriction(Message, expéditeurCommunaute not NULL))={}
+ET Intersection(Restriction(Message,expéditeurPersonne NULL), 
+Restriction(Message, expéditeurCommunaute NULL))={}
+
+Intersection(Restriction(Message, destinatairePersonne not NULL), Restriction(Message, destinataireCommunaute not NULL))={}
+ET Intersection(Restriction(Message, destinatairePersonne NULL), Restriction(Message, destinataireCommunaute NULL))={}
+
+
+Compte (#cléPublique : string)
+Intersection(Projection(Personne, compte), Projection(Communaute, compte))={}
+ET Intersection(Compte, Union(Projection(Personne, compte), Projection(Communaute, compte)) = Compte
+
+Vue communauté : permet pour chaque personne d'avoir la liste des communautés auxquelles il déclare appartenir avec un booléen qui détermine si la personne est exclue ou non.
+VueCommunauté(Personne=>Personne, nomCommunauté=>Communauté, exclu=>Communauté.exclu)
+
+Vue message : permet de visualiser chaque message en ajoutant l'identifiant du message d'origine lorsque le message s'inscrit dans un fil historique. Par exemple si C → B → A alors on veut voir la référence à A lorsqu'on affiche C.
+VueMessage(identifiantMessage=>Message, messageOrigine=>Message.premièreRef)
+
+Vue proches : permet de visualiser les communautés et personnes proches de chaque personne et communauté (à une distance inférieure à 1km)
+VueProches(Personne=>Personne, Communauté=>Communauté, PersonneDistante=>Personne, CommunautéDistante=>Communauté, distance)
