@@ -1,0 +1,86 @@
+@startuml
+title UML Résilience
+
+class Personne {
+  pseudo : string {key}
+  prenom : string
+  nom : string
+  dateNaissance : date
+  longitude: string
+  latitude: string
+  getPosition(latitude, longitude): url
+}
+Personne "1" -- "*" LienPersonne : déclare >
+Personne "1" -- "*" LienPersonne : < concerne
+Personne "1" -- "*" Service: propose >
+Personne "1..*" -down- "*" Communaute : fait partie >
+
+class LienPersonne {
+	description : string
+}
+
+class Communaute {
+	nom : string {key}
+	dateCréation : date
+	description : string
+	longitude : string
+	latitude : string
+	getPosition(latitude, longitude) : url
+}
+Communaute "1" -- "*" LienCommunaute : déclare >
+Communaute "*" -- "1" LienCommunaute : < concerne
+Communaute "1" -- "*" Service : propose >
+
+class LienCommunaute {
+  description : string
+}
+
+class Vote {
+   contre : boolean {key}
+   date : date
+}
+Personne "1" -- "*" Vote : realise >
+Vote "*" -- "1" Personne : concerne >
+Vote "*" -- "1" Communaute : concerne >
+
+class SavoirFaire {
+   degré : int[1..5]
+   description : string
+}
+Personne "*" -- "*" SavoirFaire : déclare posséder >
+Communaute "*" -- "*" SavoirFaire : déclare posséder >
+
+
+class Service{
+  Description : string
+  aDiscuter : boolean
+  montantG1 [0..1] : integer
+}
+Service "*" -- "0..1" SavoirFaire : en lien à >
+Service "*" -- "0..1" Service : contrepartie >
+
+class Message  {
+   id : integer {key}
+   message : string
+}
+Message "*" -- "0..1" Communaute : est expedié par >
+Message "*" -- "0..1" Communaute : est envoyé à >
+Message "*" -- "0..1" Personne : est expedié par >
+Message "*" -- "0..1" Personne : est envoyé à >
+Message "*" -- "0..1" Message : referencePrecedent >
+Message "*" -- "0..1" Message : referencePremier >
+note top of Message
+    est expedié par Communauté XOR est expedié par Personne
+    est envoyé à Communauté XOR est envoyé à Personne
+end note
+
+class Compte {
+   cléPublique : String {key}
+}
+Personne "0..1" -- "0..1" Compte : possède >
+Communaute "0..1" -- "0..1" Compte : possède >
+note bottom of Compte
+    est possédé par Personne XOR est possédé par Communauté
+end note
+
+@enduml
