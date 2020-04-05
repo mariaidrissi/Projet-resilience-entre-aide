@@ -88,8 +88,10 @@ CREATE TABLE Service (
   aDiscuter BOOLEAN,
   montantG1 INTEGER,
   personneQuiPropose VARCHAR REFERENCES Personne(pseudo),
+  communauteQuiPropose VARCHAR REFERENCES Communaute(nom),
   savoirFaire VARCHAR REFERENCES SavoirFaire(nom),
-  contrePartie INTEGER REFERENCES Service(id)
+  contrePartie INTEGER REFERENCES Service(id), 
+  CHECK (personneQuiPropose IS NULL AND communauteQuiPropose IS NOT NULL) OR (personneQuiPropose IS NOT NULL AND communauteQuiPropose IS NULL)
 );
 
 CREATE TABLE Message (
@@ -100,7 +102,9 @@ CREATE TABLE Message (
   destinatairePersonne VARCHAR REFERENCES Personne(pseudo),
   destinataireCommunaute VARCHAR REFERENCES Communaute(nom),
   ref INTEGER REFERENCES Message(id),
-  premiereRef INTEGER REFERENCES Message(id)
+  premiereRef INTEGER REFERENCES Message(id),
+  CHECK (expediteurPersonne IS NULL AND expediteurCommunaute IS NOT NULL) OR (expediteurPersonne IS NOT NULL AND expediteurCommunaute IS NULL),
+  CHECK (destinatairePersonne IS NULL AND destinataireCommunaute IS NOT NULL) OR (destinatairePersonne IS NOT NULL AND destinataireCommunaute IS NULL)
 );
 
 CREATE OR REPLACE FUNCTION distance(lat1 DECIMAL, lon1 DECIMAL, lat2 DECIMAL, lon2 DECIMAL) RETURNS DECIMAL AS $$
