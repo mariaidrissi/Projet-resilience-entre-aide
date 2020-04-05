@@ -19,7 +19,7 @@ PersonneDeclareSavoirFaire(#Personne=>Personne, #SavoirFaire=>SavoirFaire)
 
 CommunauteDeclareSavoirFaire(#Communaute=>Communaute, #SavoirFaire=>SavoirFaire)
 
-Service(description : string, aDiscuter : boolean, montantG1 [0..1] : integer, PersonneQuiPropose=>Personne, SavoirFaire=>SavoirFaire, ContrePartie=>Service)
+Service(description : string, aDiscuter : boolean, montantG1 [0..1] : integer, PersonneQuiPropose=>Personne, CommunauteQuiPropose=>Communaute, SavoirFaire=>SavoirFaire, ContrePartie=>Service)
 
 Message (#id : integer, message : string, expéditeurPersonne=>Personne, expéditeurCommunaute=>Communaute, destinatairePersonne=>Personne, destinataireCommunaute=>Communaute,ref=>Message, premièreRef=>Message)
 
