@@ -21,6 +21,10 @@ CommunauteDeclareSavoirFaire(#Communaute=>Communaute, #SavoirFaire=>SavoirFaire)
 
 Service(description : string, aDiscuter : boolean, montantG1 [0..1] : integer, PersonneQuiPropose=>Personne, CommunauteQuiPropose=>Communaute, SavoirFaire=>SavoirFaire, ContrePartie=>Service)
 
+Intersection(Restriction(Service, PersonneQuiPropose not NULL), Restriction(Service, CommunauteQuiPropose not NULL))={}
+ET Intersection(Restriction(Service, PersonneQuiPropose NULL), Restriction(Service, CommunauteQuiPropose NULL))={}
+
+
 Message (#id : integer, message : string, expéditeurPersonne=>Personne, expéditeurCommunaute=>Communaute, destinatairePersonne=>Personne, destinataireCommunaute=>Communaute,ref=>Message, premièreRef=>Message)
 
 Intersection(Restriction(Message,expéditeurPersonne not NULL), Restriction(Message, expéditeurCommunaute not NULL))={}
