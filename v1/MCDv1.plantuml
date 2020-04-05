@@ -44,6 +44,7 @@ Vote "*" -- "1" Personne : concerne >
 Vote "*" -- "1" Communaute : concerne >
 
 class SavoirFaire {
+   nom : string {key}
    degré : int[1..5]
    description : string
 }
