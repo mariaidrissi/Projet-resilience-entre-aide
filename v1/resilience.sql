@@ -228,5 +228,5 @@ INSERT INTO Message(message, expediteurPersonne, expediteurCommunaute, destinata
   ('Est-ce que tu recommandes une marque de peinture ?', 'clementdupuis', NULL, 'mariaidrissi', NULL, NULL, NULL),
   ('La peinture disponible au magasin du coté du cinéma est convenable', 'mariaidrissi', NULL, 'clementdupuis', NULL, 1, 1),
   ('Dacc, merci.', 'clementdupuis', NULL, 'mariaidrissi', NULL, 2, 1),
-  ('Seriez vous interessé par nos fruits et légumes de saison?', NULL, 'JardinageCommunaute', NULL, 'VeganCommunaute', NULL, NULL)
+  ('Seriez vous interessé par nos fruits et légumes de saison?', NULL, 'Jardinagecommunaute', NULL, 'Vegancommunaute', NULL, NULL)
  ;
