@@ -223,3 +223,10 @@ INSERT INTO Service (description, aDiscuter, personneQuiPropose, savoirFaire) VA
   ('Cuisine de plats asiatiques', FALSE, 'clementdupuis', 'cuisine'),
   ('Peindre les murs de la maison', FALSE, 'mariaidrissi', 'peinture')
 ;
+
+INSERT INTO Message(message, expediteurPersonne, expediteurCommunaute, destinatairePersonne, destinataireCommunaute, ref, premiereRef) VALUES
+  ('Est-ce que tu recommandes une marque de peinture ?', 'clementdupuis', NULL, 'mariaidrissi', NULL, NULL, NULL),
+  ('La peinture disponible au magasin du coté du cinéma est convenable', 'mariaidrissi', NULL, 'clementdupuis', NULL, 1, 1),
+  ('Dacc, merci.', 'clementdupuis', NULL, 'mariaidrissi', NULL, 2, 1),
+  ('Seriez vous interessé par nos fruits et légumes de saison?', NULL, 'JardinageCommunaute', NULL, 'VeganCommunaute', NULL, NULL)
+ ;
