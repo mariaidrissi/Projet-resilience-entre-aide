@@ -55,19 +55,21 @@ CREATE TABLE Vote(
 
 CREATE TABLE SavoirFaire (
   id SERIAL PRIMARY KEY,
-  degre INTEGER CHECK (degre>=0 AND degre<=5),
   description TEXT
 );
 
 CREATE TABLE PersonneDeclareSavoirFaire (
   personne VARCHAR REFERENCES Personne(pseudo),
-  savoirFaire INTEGER REFERENCES SavoirFaire(id)
+  savoirFaire INTEGER REFERENCES SavoirFaire(id),
+  degre INTEGER CHECK (degre>=0 AND degre<=5),
+  PRIMARY KEY (personne, savoirFaire)
 );
 
 CREATE TABLE CommunauteDeclareSavoirFaire (
   communaute VARCHAR REFERENCES Communaute(nom),
   savoirFaire INTEGER REFERENCES SavoirFaire(id),
-  PRIMARY KEY (Communaute, SavoirFaire)
+  degre INTEGER CHECK (degre>=0 AND degre<=5),
+  PRIMARY KEY (communaute, savoirFaire)
 );
 
 CREATE TABLE Service (
