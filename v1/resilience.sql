@@ -1,4 +1,16 @@
-DROP TABLE IF EXISTS Compte, Personne, LienPersonne, Communaute, PersonneFaitPartieCommunaute, LienCommunaute, Vote, SavoirFaire, PersonneDeclareSavoirFaire, CommunauteDeclareSavoirFaire, Service, Message;
+DROP TABLE IF EXISTS
+Position, Compte, Personne, LienPersonne, Communaute,
+PersonneFaitPartieCommunaute, LienCommunaute,
+Vote, SavoirFaire, PersonneDeclareSavoirFaire,
+CommunauteDeclareSavoirFaire, Service, Message
+CASCADE
+;
+
+CREATE TABLE Position (
+  id SERIAL PRIMARY KEY,
+  latitude DECIMAL,
+  longitude DECIMAL
+);
 
 CREATE TABLE Compte (
   clePublique VARCHAR PRIMARY KEY
@@ -9,8 +21,7 @@ CREATE TABLE Personne (
   prenom VARCHAR,
   nom VARCHAR,
   dateNaissance DATE,
-  longitude DECIMAL,
-  latitude DECIMAL,
+  position INTEGER REFERENCES Position(id),
   compte VARCHAR REFERENCES Compte(clePublique)
 );
 
@@ -25,8 +36,7 @@ CREATE TABLE Communaute (
   nom VARCHAR PRIMARY KEY,
   dateCreation DATE,
   description TEXT,
-  longitude DECIMAL,
-  latitude DECIMAL,
+  position INTEGER REFERENCES Position(id),
   compte VARCHAR REFERENCES Compte(clePublique)
 );
 
@@ -93,6 +103,40 @@ CREATE TABLE Message (
   premiereRef INTEGER REFERENCES Message(id)
 );
 
+CREATE OR REPLACE FUNCTION distance(lat1 DECIMAL, lon1 DECIMAL, lat2 DECIMAL, lon2 DECIMAL) RETURNS DECIMAL AS $$
+DECLARE
+    x float = 111.12 * (lat2 - lat1);
+    y float = 111.12 * (lon2 - lon1) * cos(lat1 / 92.215);
+BEGIN
+    RETURN sqrt(x * x + y * y);
+END
+$$ LANGUAGE plpgsql;
+;
+
+CREATE VIEW vueCommunaute (pseudo, communaute, exclu) AS
+  SELECT F.personne, F.communaute, F.exclu
+  FROM PersonneFaitPartieCommunaute F
+  GROUP BY F.personne, F.communaute
+;
+
+CREATE VIEW vueMessage (idMessage, contenu, idMessagePrecedent, idMessageOrigine) AS
+  SELECT id, message, ref, premiereRef
+  FROM Message
+;
+
+-- CREATE VIEW vueProches () AS
+--   SELECT nom, pseudo, distance
+--   FROM (SELECT distance(C.) AS distance1
+--         FROM Position P, Communaute C, Personne P
+--         WHERE
+--         ;) X
+--   WHERE X.distance < 1
+-- ;
+
+
+
+-- INSERTIONS
+
 INSERT INTO Compte VALUES
 ('8qQ7UhikRFZspgrnlmzaefeUNiJmAWmmSomuiomyui1x'),
 ('AhAnDkoiJNiHNhY3s5dBorCnDoFB5ojexuxZdzempooK'),
@@ -104,12 +148,23 @@ INSERT INTO Compte VALUES
 ('eked34nzeukdjEDJfhj45JZnejkdh3445ERFskdhkedf')
 ;
 
-INSERT INTO Personne(pseudo, prenom, nom, dateNaissance, longitude, latitude, compte) VALUES
-  ('matt', 'Matthieu', 'GLORION', '1997-10-24', 47.390547, -2.955815, '8qQ7UhikRFZspgrnlmzaefeUNiJmAWmmSomuiomyui1x'),
-  ('clementdupuis', 'Clément', 'DUPUIS', '1997-10-24', 49.415048, 2.818973, 'AhAnDkoiJNiHNhY3s5dBorCnDoFB5ojexuxZdzempooK'),
-  ('mariaidrissi', 'Maria', 'IDRISSI', '1997-10-24', 49.401488, 2.801639, 'kjNhJhbjhkiUuiu3s5dBorCnDoFB5hbjhkiUuiuszoaZ'),
-  ('pilo', 'Pilo', 'MILIEU', '1997-10-24', 49.408485, 2.808484, 'zazaDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB'),
-  ('bryan', 'Nicolas', 'CALMELS', '1900-01-01', 49.408485, 2.808484, 'orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB')
+INSERT INTO Position(latitude, longitude) VALUES
+(47.390547, -2.955815),
+(49.415048, 2.818973),
+(49.401488, 2.801639),
+(49.408485, 2.808484),
+(49.408485, 2.808484),
+(59.4, 45.34),
+(65.4, 75.34),
+(34.4, 29.34)
+;
+
+INSERT INTO Personne(pseudo, prenom, nom, dateNaissance, position, compte) VALUES
+  ('matt', 'Matthieu', 'GLORION', '1997-10-24', 1, '8qQ7UhikRFZspgrnlmzaefeUNiJmAWmmSomuiomyui1x'),
+  ('clementdupuis', 'Clément', 'DUPUIS', '1997-10-24', 2, 'AhAnDkoiJNiHNhY3s5dBorCnDoFB5ojexuxZdzempooK'),
+  ('mariaidrissi', 'Maria', 'IDRISSI', '1997-10-24', 3, 'kjNhJhbjhkiUuiu3s5dBorCnDoFB5hbjhkiUuiuszoaZ'),
+  ('pilo', 'Pilo', 'MILIEU', '1997-10-24', 4, 'zazaDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB'),
+  ('bryan', 'Nicolas', 'CALMELS', '1900-01-01', 5, 'orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB')
 ;
 
 INSERT INTO LienPersonne(description, personneDeclarant, personneConcernee) VALUES
@@ -123,27 +178,27 @@ INSERT INTO LienPersonne(description, personneDeclarant, personneConcernee) VALU
   ('chef de grafhit', 'bryan', 'matt')
 ;
 
-INSERT INTO Communaute(nom, dateCreation, description, longitude, latitude, compte) VALUES
-  ('Vegancommunaute', '2020-03-04', 'Cette communauté est déstinée à toute personne végane ou intéréssée par un mode de vie végan', 59.4, 45.34, 'fhGRKEI45fsdDdEF43sF45TESEfEF43sF45TESEffjns'),
-  ('Yogacommunaute', '2020-02-04', 'Cette communauté est déstinée à toute personne pratiquant ou intéréssée par le yoga', 65.4, 75.34, 'mzaefeUNiJmCnDoFB5hbjhkiUuiuszfhbjhkiUuiuszf'),
-  ('Jardinagecommunaute', '2020-02-04', 'Cette communauté est déstinée à toute personne pratiquant ou intéréssée par le jardinage', 34.4, 29.34, 'eked34nzeukdjEDJfhj45JZnejkdh3445ERFskdhkedf')
+INSERT INTO Communaute(nom, dateCreation, description, position, compte) VALUES
+  ('Vegancommunaute', '2020-03-04', 'Cette communauté est déstinée à toute personne végane ou intéréssée par un mode de vie végan', 6, 'fhGRKEI45fsdDdEF43sF45TESEfEF43sF45TESEffjns'),
+  ('Yogacommunaute', '2020-02-04', 'Cette communauté est déstinée à toute personne pratiquant ou intéréssée par le yoga', 7, 'mzaefeUNiJmCnDoFB5hbjhkiUuiuszfhbjhkiUuiuszf'),
+  ('Jardinagecommunaute', '2020-02-04', 'Cette communauté est déstinée à toute personne pratiquant ou intéréssée par le jardinage', 8, 'eked34nzeukdjEDJfhj45JZnejkdh3445ERFskdhkedf')
 ;
 
 INSERT INTO LienCommunaute(description, communauteDeclarant, communauteConcernee) VALUES
-('Les gens de la Vegancommunaute peuvent faire des séances de yoga avec la Yogacommunaute','Vegancommunaute','Yogacommunaute'),
-('Les gens de la Yogacommunaute peuvent faire des séances de jardinage avec la Jardinagecommunaute','Yogacommunaute','Jardinagecommunaute'),
-('Les gens de la Jardinagecommunaute peuvent donner des légumes à la Vegancommunaute','Jardinagecommunaute','Vegancommunaute')
+  ('Les gens de la Vegancommunaute peuvent faire des séances de yoga avec la Yogacommunaute','Vegancommunaute','Yogacommunaute'),
+  ('Les gens de la Yogacommunaute peuvent faire des séances de jardinage avec la Jardinagecommunaute','Yogacommunaute','Jardinagecommunaute'),
+  ('Les gens de la Jardinagecommunaute peuvent donner des légumes à la Vegancommunaute','Jardinagecommunaute','Vegancommunaute')
 ;
 
 INSERT INTO PersonneFaitPartieCommunaute(personne, communaute, exclu) VALUES
-('matt', 'Jardinagecommunaute', '0'),
-('mariaidrissi', 'Yogacommunaute', '0'),
-('clementdupuis', 'Vegancommunaute', '0')
+  ('matt', 'Jardinagecommunaute', '0'),
+  ('mariaidrissi', 'Yogacommunaute', '0'),
+  ('clementdupuis', 'Vegancommunaute', '0')
 ;
 
 INSERT INTO SavoirFaire(nom, description) VALUES
   ('jardinage', 'savoir faire pousser des plantes'),
-  ('cuisine', 'savoir cuisiner des plats'),
+  ('cuisine', 'savoir faire pousser des plats'),
   ('peinture', 'savoir peindre'),
   ('nouage_de_lacets', 'savoir nouer ses lacets'),
   ('navigation', 'savoir naviguer avec un bateau')
@@ -156,18 +211,15 @@ INSERT INTO PersonneDeclareSavoirFaire VALUES
   ('matt', 'cuisine', '4')
 ;
 
-
 INSERT INTO Vote(contre, dateVote, personneVotante, personneConcernee, communauteConcernee) VALUES
-(FALSE, '2020-03-04', 'mariaidrissi', 'matt', "Yogacommunaute"),
-(TRUE, '2020-01-04', 'matt', 'mariaidrissi', "Jardinagecommunaute"),
-(FALSE, '2020-02-04', 'matt', 'clementdupuis', "Jardinagecommunaute"),
-(FALSE, '2020-04-04', 'clementdupuis', 'mariaidrissi', "Vegancommunaute")
+  (FALSE, '2020-03-04', 'mariaidrissi', 'matt', 'Yogacommunaute'),
+  (TRUE, '2020-01-04', 'matt', 'mariaidrissi', 'Jardinagecommunaute'),
+  (FALSE, '2020-02-04', 'matt', 'clementdupuis', 'Jardinagecommunaute'),
+  (FALSE, '2020-04-04', 'clementdupuis', 'mariaidrissi', 'Vegancommunaute')
 ;
 
-INSERT INTO Service (id, description, aDiscuter, personneQuiPropose, savoirFaire) VALUES
-(543423,'Jardinage à domicile pour personnes agées', FALSE, 'matt', 'jardinage'), 
-(348233,'Cuisine de plats asiatiques', FALSE, 'clementdupuis', 'cuisine'), 
-(138434,'Peindre les murs de la maison', FALSE, 'mariaidrissi', 'peinture')
+INSERT INTO Service (description, aDiscuter, personneQuiPropose, savoirFaire) VALUES
+  ('Jardinage à domicile pour personnes agées', FALSE, 'matt', 'jardinage'),
+  ('Cuisine de plats asiatiques', FALSE, 'clementdupuis', 'cuisine'),
+  ('Peindre les murs de la maison', FALSE, 'mariaidrissi', 'peinture')
 ;
-
-
