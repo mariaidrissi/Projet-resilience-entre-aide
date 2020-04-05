@@ -71,14 +71,14 @@ CREATE TABLE SavoirFaire (
 CREATE TABLE PersonneDeclareSavoirFaire (
   personne VARCHAR REFERENCES Personne(pseudo),
   savoirFaire VARCHAR REFERENCES SavoirFaire(nom),
-  degre INTEGER CHECK (degre>=0 AND degre<=5),
+  degre INTEGER CHECK (degre>=1 AND degre<=5),
   PRIMARY KEY (personne, savoirFaire)
 );
 
 CREATE TABLE CommunauteDeclareSavoirFaire (
   communaute VARCHAR REFERENCES Communaute(nom),
   savoirFaire VARCHAR REFERENCES SavoirFaire(nom),
-  degre INTEGER CHECK (degre>=0 AND degre<=5),
+  degre INTEGER CHECK (degre>=1 AND degre<=5),
   PRIMARY KEY (communaute, savoirFaire)
 );
 
