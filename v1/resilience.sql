@@ -90,8 +90,7 @@ CREATE TABLE Service (
   personneQuiPropose VARCHAR REFERENCES Personne(pseudo),
   communauteQuiPropose VARCHAR REFERENCES Communaute(nom),
   savoirFaire VARCHAR REFERENCES SavoirFaire(nom),
-  contrePartie INTEGER REFERENCES Service(id), 
-  CHECK (personneQuiPropose IS NULL AND communauteQuiPropose IS NOT NULL) OR (personneQuiPropose IS NOT NULL AND communauteQuiPropose IS NULL)
+  contrePartie INTEGER REFERENCES Service(id)
 );
 
 CREATE TABLE Message (
@@ -102,9 +101,7 @@ CREATE TABLE Message (
   destinatairePersonne VARCHAR REFERENCES Personne(pseudo),
   destinataireCommunaute VARCHAR REFERENCES Communaute(nom),
   ref INTEGER REFERENCES Message(id),
-  premiereRef INTEGER REFERENCES Message(id),
-  CHECK (expediteurPersonne IS NULL AND expediteurCommunaute IS NOT NULL) OR (expediteurPersonne IS NOT NULL AND expediteurCommunaute IS NULL),
-  CHECK (destinatairePersonne IS NULL AND destinataireCommunaute IS NOT NULL) OR (destinatairePersonne IS NOT NULL AND destinataireCommunaute IS NULL)
+  premiereRef INTEGER REFERENCES Message(id)
 );
 
 CREATE OR REPLACE FUNCTION distance(lat1 DECIMAL, lon1 DECIMAL, lat2 DECIMAL, lon2 DECIMAL) RETURNS DECIMAL AS $$
@@ -242,10 +239,10 @@ INSERT INTO Vote(contre, dateVote, personneVotante, personneConcernee, communaut
   (FALSE, '2020-04-04', 'clementdupuis', 'mariaidrissi', 'Vegancommunaute')
 ;
 
-INSERT INTO Service (description, aDiscuter, personneQuiPropose, savoirFaire) VALUES
-  ('Jardinage à domicile pour personnes agées', FALSE, 'matt', 'jardinage'),
-  ('Cuisine de plats asiatiques', FALSE, 'clementdupuis', 'cuisine'),
-  ('Peindre les murs de la maison', FALSE, 'mariaidrissi', 'peinture')
+INSERT INTO Service(description, aDiscuter, personneQuiPropose, communauteQuiPropose, savoirFaire) VALUES
+  ('Jardinage à domicile pour personnes agées', FALSE, 'matt', NULL, 'jardinage'),
+  ('Cuisine de plats asiatiques', FALSE, 'clementdupuis', NULL, 'cuisine'),
+  ('Peindre les murs de la maison', FALSE, 'mariaidrissi', NULL, 'peinture')
 ;
 
 INSERT INTO Message(message, expediteurPersonne, expediteurCommunaute, destinatairePersonne, destinataireCommunaute, ref, premiereRef) VALUES
