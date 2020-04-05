@@ -93,14 +93,6 @@ CREATE TABLE Message (
   premiereRef INTEGER REFERENCES Message(id)
 );
 
-CREATE VIEW vueCommunaute (pseudo, communaute, exclu) AS
-SELECT F.personne, F.communaute, F.exclu
-FROM PersonneFaitPartieCommunaute F
-GROUP BY F.personne, F.communaute
-;
-
-
-
 INSERT INTO Compte VALUES
 ('8qQ7UhikRFZspgrnlmzaefeUNiJmAWmmSomuiomyui1x'),
 ('AhAnDkoiJNiHNhY3s5dBorCnDoFB5ojexuxZdzempooK'),
@@ -151,7 +143,7 @@ INSERT INTO PersonneFaitPartieCommunaute(personne, communaute, exclu) VALUES
 
 INSERT INTO SavoirFaire(nom, description) VALUES
   ('jardinage', 'savoir faire pousser des plantes'),
-  ('cuisine', 'savoir faire pousser des plats'),
+  ('cuisine', 'savoir cuisiner des plats'),
   ('peinture', 'savoir peindre'),
   ('nouage_de_lacets', 'savoir nouer ses lacets'),
   ('navigation', 'savoir naviguer avec un bateau')
@@ -163,3 +155,19 @@ INSERT INTO PersonneDeclareSavoirFaire VALUES
   ('matt', 'jardinage', '4'),
   ('matt', 'cuisine', '4')
 ;
+
+
+INSERT INTO Vote(contre, dateVote, personneVotante, personneConcernee, communauteConcernee) VALUES
+(FALSE, '2020-03-04', 'mariaidrissi', 'matt', "Yogacommunaute"),
+(TRUE, '2020-01-04', 'matt', 'mariaidrissi', "Jardinagecommunaute"),
+(FALSE, '2020-02-04', 'matt', 'clementdupuis', "Jardinagecommunaute"),
+(FALSE, '2020-04-04', 'clementdupuis', 'mariaidrissi', "Vegancommunaute")
+;
+
+INSERT INTO Service (id, description, aDiscuter, personneQuiPropose, savoirFaire) VALUES
+(543423,'Jardinage à domicile pour personnes agées', FALSE, 'matt', 'jardinage'), 
+(348233,'Cuisine de plats asiatiques', FALSE, 'clementdupuis', 'cuisine'), 
+(138434,'Peindre les murs de la maison', FALSE, 'mariaidrissi', 'peinture')
+;
+
+
