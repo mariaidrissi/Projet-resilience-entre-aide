@@ -124,7 +124,7 @@ CREATE VIEW vueMessage (idMessage, contenu, idMessagePrecedent, idMessageOrigine
   FROM Message
 ;
 
-CREATE VIEW vueProches(distance, pseudo1, communaute1, pseudo2, communaute2) AS
+CREATE VIEW vueProches(distance_km, pseudo1, communaute1, personneProche, communauteProche) AS
   SELECT X.distance, X.pseudo1, X.commu1, X.pseudo2, X.commu2
   FROM (
     SELECT distance(P1.latitude, P1.longitude, P2.latitude, P2.longitude) AS distance,
@@ -139,8 +139,8 @@ CREATE VIEW vueProches(distance, pseudo1, communaute1, pseudo2, communaute2) AS
       AND (P1.id = C1.position OR P1.id = Pers1.position)
       AND (P2.id = C2.position OR P2.id = Pers2.position)
   ) X
-  HAVING distance < 1
   GROUP BY X.pseudo1, X.commu1, X.pseudo2, X.commu2, X.distance
+  HAVING distance < 1
 ;
 
 
@@ -155,18 +155,20 @@ INSERT INTO Compte VALUES
 ('orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB'),
 ('fhGRKEI45fsdDdEF43sF45TESEfEF43sF45TESEffjns'),
 ('mzaefeUNiJmCnDoFB5hbjhkiUuiuszfhbjhkiUuiuszf'),
-('eked34nzeukdjEDJfhj45JZnejkdh3445ERFskdhkedf')
+('eked34nzeukdjEDJfhj45JZnejkdh3445ERFskdhkedf'),
+('pouzaeoiuazeiuqdfsbdckjsnqdkqsdkqsdkqsdjhefl')
 ;
 
 INSERT INTO Position(latitude, longitude) VALUES
 (47.390547, -2.955815),
 (49.415048, 2.818973),
-(49.401488, 2.801639),
-(49.408485, 2.808484),
+(49.412011, 2.815001),
+(49.413449, 2.815280),
 (49.408485, 2.808484),
 (59.4, 45.34),
 (65.4, 75.34),
-(34.4, 29.34)
+(34.4, 29.34),
+(49.415629, 2.818578)
 ;
 
 INSERT INTO Personne(pseudo, prenom, nom, dateNaissance, position, compte) VALUES
@@ -191,7 +193,8 @@ INSERT INTO LienPersonne(description, personneDeclarant, personneConcernee) VALU
 INSERT INTO Communaute(nom, dateCreation, description, position, compte) VALUES
   ('Vegancommunaute', '2020-03-04', 'Cette communauté est déstinée à toute personne végane ou intéréssée par un mode de vie végan', 6, 'fhGRKEI45fsdDdEF43sF45TESEfEF43sF45TESEffjns'),
   ('Yogacommunaute', '2020-02-04', 'Cette communauté est déstinée à toute personne pratiquant ou intéréssée par le yoga', 7, 'mzaefeUNiJmCnDoFB5hbjhkiUuiuszfhbjhkiUuiuszf'),
-  ('Jardinagecommunaute', '2020-02-04', 'Cette communauté est déstinée à toute personne pratiquant ou intéréssée par le jardinage', 8, 'eked34nzeukdjEDJfhj45JZnejkdh3445ERFskdhkedf')
+  ('Jardinagecommunaute', '2020-02-04', 'Cette communauté est déstinée à toute personne pratiquant ou intéréssée par le jardinage', 8, 'eked34nzeukdjEDJfhj45JZnejkdh3445ERFskdhkedf'),
+  ('etudiantsUTC', '2020-02-04', 'Cette communauté est déstinée à tous les étudiants et étudiantes de l"UTC', 9, 'pouzaeoiuazeiuqdfsbdckjsnqdkqsdkqsdkqsdjhefl')
 ;
 
 INSERT INTO LienCommunaute(description, communauteDeclarant, communauteConcernee) VALUES
