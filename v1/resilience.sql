@@ -95,12 +95,25 @@ INSERT INTO Compte VALUES
 ('8qQ7UhikRFZspgrnlmzaefeUNiJmAWmmSomuiomyui1x'),
 ('AhAnDkoiJNiHNhY3s5dBorCnDoFB5ojexuxZdzempooK'),
 ('kjNhJhbjhkiUuiu3s5dBorCnDoFB5hbjhkiUuiuszoaZ'),
-('orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB')
+('orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB'),
+('orCnDoRFZspgrnlmzaRFZspgrnlmzaKAhAnDkoY3s5dB')
 ;
 
 INSERT INTO Personne(pseudo, prenom, nom, dateNaissance, longitude, latitude, compte) VALUES
   ('matt', 'Matthieu', 'GLORION', '1997-10-24', 47.390547, -2.955815, '8qQ7UhikRFZspgrnlmzaefeUNiJmAWmmSomuiomyui1x'),
   ('clementdupuis', 'Clément', 'DUPUIS', '1997-10-24', 49.415048, 2.818973, 'AhAnDkoiJNiHNhY3s5dBorCnDoFB5ojexuxZdzempooK'),
   ('mariaidrissi', 'Maria', 'IDRISSI', '1997-10-24', 49.401488, 2.801639, 'kjNhJhbjhkiUuiu3s5dBorCnDoFB5hbjhkiUuiuszoaZ'),
-  ('pilo', 'Pilo', 'MILIEU', '1997-10-24', 49.408485, 2.808484, 'orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB')
+  ('pilo', 'Pilo', 'MILIEU', '1997-10-24', 49.408485, 2.808484, 'orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB'),
+  ('bryan', 'Nicolas', 'CALMELS', '1900-01-01', 49.408485, 2.808484, 'orCnDoRFZspgrnlmzaRFZspgrnlmzaKAhAnDkoY3s5dB')
+;
+
+INSERT INTO LienPersonne(description, personneDeclarant, personneConcernee) VALUES
+  ('collaboration NA17', 'matt', 'mariaidrissi'),
+  ('collaboration NA17', 'matt', 'clementdupuis'),
+  ('collaboration NA17', 'clementdupuis', 'mariaidrissi'),
+  ('collaboration NA17', 'clementdupuis', 'matt'),
+  ('collaboration NA17', 'mariaidrissi', 'matt'),
+  ('collaboration NA17', 'mariaidrissi', 'clementdupuis'),
+  ('voisin', 'matt', 'pilo'),
+  ('chef de grafhit', 'bryan', 'matt')
 ;
