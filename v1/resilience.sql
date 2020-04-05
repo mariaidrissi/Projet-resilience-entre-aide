@@ -124,14 +124,24 @@ CREATE VIEW vueMessage (idMessage, contenu, idMessagePrecedent, idMessageOrigine
   FROM Message
 ;
 
--- CREATE VIEW vueProches () AS
---   SELECT nom, pseudo, distance
---   FROM (SELECT distance(C.) AS distance1
---         FROM Position P, Communaute C, Personne P
---         WHERE
---         ;) X
---   WHERE X.distance < 1
--- ;
+CREATE VIEW vueProches(distance, pseudo1, communaute1, pseudo2, communaute2) AS
+  SELECT X.distance, X.pseudo1, X.commu1, X.pseudo2, X.commu2
+  FROM (
+    SELECT distance(P1.latitude, P1.longitude, P2.latitude, P2.longitude) AS distance,
+      Pers1.pseudo AS pseudo1,
+      C1.nom AS commu1,
+      Pers2.pseudo AS pseudo2,
+      C2.nom AS commu2
+    FROM  Communaute C1 FULL JOIN Personne Pers1 ON C1.position = Pers1.Position,
+          Communaute C2 FULL JOIN Personne Pers2 ON C2.position = Pers2.Position,
+          Position P1, Position P2
+    WHERE P1.id<>P2.id
+      AND (P1.id = C1.position OR P1.id = Pers1.position)
+      AND (P2.id = C2.position OR P2.id = Pers2.position)
+  ) X
+  HAVING distance < 1
+  GROUP BY X.pseudo1, X.commu1, X.pseudo2, X.commu2, X.distance
+;
 
 
 
