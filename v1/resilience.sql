@@ -15,7 +15,7 @@ CREATE TABLE Personne (
 );
 
 CREATE TABLE LienPersonne (
-  id INTEGER PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   description VARCHAR,
   personneDeclarant VARCHAR REFERENCES Personne(pseudo),
   personneConcernee VARCHAR REFERENCES Personne(pseudo)
@@ -54,7 +54,7 @@ CREATE TABLE Vote(
 );
 
 CREATE TABLE SavoirFaire (
-  id INTEGER PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   degre INTEGER CHECK (degre>=0 AND degre<=5),
   description TEXT
 );
@@ -71,7 +71,7 @@ CREATE TABLE CommunauteDeclareSavoirFaire (
 );
 
 CREATE TABLE Service (
-  id INTEGER PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   description VARCHAR,
   aDiscuter BOOLEAN,
   montantG1 INTEGER,
@@ -81,7 +81,7 @@ CREATE TABLE Service (
 );
 
 CREATE TABLE Message (
-  id INTEGER PRIMARY KEY,
+  id SERIAL PRIMARY KEY,
   message TEXT,
   expediteurPersonne VARCHAR REFERENCES Personne(pseudo),
   expediteurCommunaute VARCHAR REFERENCES Communaute(nom),
@@ -90,3 +90,17 @@ CREATE TABLE Message (
   ref INTEGER REFERENCES Message(id),
   premiereRef INTEGER REFERENCES Message(id)
 );
+
+INSERT INTO Compte VALUES
+('8qQ7UhikRFZspgrnlmzaefeUNiJmAWmmSomuiomyui1x'),
+('AhAnDkoiJNiHNhY3s5dBorCnDoFB5ojexuxZdzempooK'),
+('kjNhJhbjhkiUuiu3s5dBorCnDoFB5hbjhkiUuiuszoaZ'),
+('orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB')
+;
+
+INSERT INTO Personne(pseudo, prenom, nom, dateNaissance, longitude, latitude, compte) VALUES
+  ('matt', 'Matthieu', 'GLORION', '1997-10-24', 47.390547, -2.955815, '8qQ7UhikRFZspgrnlmzaefeUNiJmAWmmSomuiomyui1x'),
+  ('clementdupuis', 'Clément', 'DUPUIS', '1997-10-24', 49.415048, 2.818973, 'AhAnDkoiJNiHNhY3s5dBorCnDoFB5ojexuxZdzempooK'),
+  ('mariaidrissi', 'Maria', 'IDRISSI', '1997-10-24', 49.401488, 2.801639, 'kjNhJhbjhkiUuiu3s5dBorCnDoFB5hbjhkiUuiuszoaZ'),
+  ('pilo', 'Pilo', 'MILIEU', '1997-10-24', 49.408485, 2.808484, 'orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB')
+;
