@@ -54,20 +54,20 @@ CREATE TABLE Vote(
 );
 
 CREATE TABLE SavoirFaire (
-  id SERIAL PRIMARY KEY,
+  nom VARCHAR PRIMARY KEY,
   description TEXT
 );
 
 CREATE TABLE PersonneDeclareSavoirFaire (
   personne VARCHAR REFERENCES Personne(pseudo),
-  savoirFaire INTEGER REFERENCES SavoirFaire(id),
+  savoirFaire VARCHAR REFERENCES SavoirFaire(nom),
   degre INTEGER CHECK (degre>=0 AND degre<=5),
   PRIMARY KEY (personne, savoirFaire)
 );
 
 CREATE TABLE CommunauteDeclareSavoirFaire (
   communaute VARCHAR REFERENCES Communaute(nom),
-  savoirFaire INTEGER REFERENCES SavoirFaire(id),
+  savoirFaire VARCHAR REFERENCES SavoirFaire(nom),
   degre INTEGER CHECK (degre>=0 AND degre<=5),
   PRIMARY KEY (communaute, savoirFaire)
 );
@@ -78,7 +78,7 @@ CREATE TABLE Service (
   aDiscuter BOOLEAN,
   montantG1 INTEGER,
   personneQuiPropose VARCHAR REFERENCES Personne(pseudo),
-  savoirFaire INTEGER REFERENCES SavoirFaire(id),
+  savoirFaire VARCHAR REFERENCES SavoirFaire(nom),
   contrePartie INTEGER REFERENCES Service(id)
 );
 
