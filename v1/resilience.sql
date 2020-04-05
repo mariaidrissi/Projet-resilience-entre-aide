@@ -31,17 +31,17 @@ CREATE TABLE Communaute (
 );
 
 CREATE TABLE PersonneFaitPartieCommunaute(
-  personne VARCHAR REFERENCES Personne(pseudo),
   communaute VARCHAR REFERENCES Communaute(nom),
+  personne VARCHAR REFERENCES Personne(pseudo),
   exclu BOOLEAN,
   PRIMARY KEY(personne, communaute)
 );
 
 CREATE TABLE LienCommunaute(
+  id SERIAL PRIMARY KEY,
   description VARCHAR,
-  PRIMARY KEY(CommunauteQuiDeclare, CommunauteConcernee),
-  CommunauteQuiDeclare VARCHAR REFERENCES Communaute(nom),
-  CommunauteConcernee VARCHAR REFERENCES Communaute(nom)
+  communauteDeclarant VARCHAR REFERENCES Communaute(nom),
+  communauteConcernee VARCHAR REFERENCES Communaute(nom)
 );
 
 CREATE TABLE Vote(
@@ -97,6 +97,7 @@ INSERT INTO Compte VALUES
 ('8qQ7UhikRFZspgrnlmzaefeUNiJmAWmmSomuiomyui1x'),
 ('AhAnDkoiJNiHNhY3s5dBorCnDoFB5ojexuxZdzempooK'),
 ('kjNhJhbjhkiUuiu3s5dBorCnDoFB5hbjhkiUuiuszoaZ'),
+('zazaDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB'),
 ('orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB'),
 ('fhGRKEI45fsdDdEF43sF45TESEfEF43sF45TESEffjns'),
 ('mzaefeUNiJmCnDoFB5hbjhkiUuiuszfhbjhkiUuiuszf'),
@@ -107,17 +108,28 @@ INSERT INTO Personne(pseudo, prenom, nom, dateNaissance, longitude, latitude, co
   ('matt', 'Matthieu', 'GLORION', '1997-10-24', 47.390547, -2.955815, '8qQ7UhikRFZspgrnlmzaefeUNiJmAWmmSomuiomyui1x'),
   ('clementdupuis', 'Clément', 'DUPUIS', '1997-10-24', 49.415048, 2.818973, 'AhAnDkoiJNiHNhY3s5dBorCnDoFB5ojexuxZdzempooK'),
   ('mariaidrissi', 'Maria', 'IDRISSI', '1997-10-24', 49.401488, 2.801639, 'kjNhJhbjhkiUuiu3s5dBorCnDoFB5hbjhkiUuiuszoaZ'),
-  ('pilo', 'Pilo', 'MILIEU', '1997-10-24', 49.408485, 2.808484, 'orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB')
+  ('pilo', 'Pilo', 'MILIEU', '1997-10-24', 49.408485, 2.808484, 'zazaDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB'),
+  ('bryan', 'Nicolas', 'CALMELS', '1900-01-01', 49.408485, 2.808484, 'orCnDoFB5ojexuxZdzempooKAhAnDkoiJNiHNhY3s5dB')
 ;
 
+INSERT INTO LienPersonne(description, personneDeclarant, personneConcernee) VALUES
+  ('collaboration NA17', 'matt', 'mariaidrissi'),
+  ('collaboration NA17', 'matt', 'clementdupuis'),
+  ('collaboration NA17', 'clementdupuis', 'mariaidrissi'),
+  ('collaboration NA17', 'clementdupuis', 'matt'),
+  ('collaboration NA17', 'mariaidrissi', 'matt'),
+  ('collaboration NA17', 'mariaidrissi', 'clementdupuis'),
+  ('voisin', 'matt', 'pilo'),
+  ('chef de grafhit', 'bryan', 'matt')
+;
 
-INSERT INTO Communaute(nom,dateCreation, description, longitude, latitude, compte) VALUES 
+INSERT INTO Communaute(nom, dateCreation, description, longitude, latitude, compte) VALUES
   ('Vegancommunaute', '2020-03-04', 'Cette communauté est déstinée à toute personne végane ou intéréssée par un mode de vie végan', 59.4, 45.34, 'fhGRKEI45fsdDdEF43sF45TESEfEF43sF45TESEffjns'),
-  ('Yogacommunaute', '2020-02-04', 'Cette communauté est déstinée à toute personne pratiquant ou intéréssée par le yoga', 65.4, 75.34, 'mzaefeUNiJmCnDoFB5hbjhkiUuiuszfhbjhkiUuiuszf')
+  ('Yogacommunaute', '2020-02-04', 'Cette communauté est déstinée à toute personne pratiquant ou intéréssée par le yoga', 65.4, 75.34, 'mzaefeUNiJmCnDoFB5hbjhkiUuiuszfhbjhkiUuiuszf'),
   ('Jardinagecommunaute', '2020-02-04', 'Cette communauté est déstinée à toute personne pratiquant ou intéréssée par le jardinage', 34.4, 29.34, 'eked34nzeukdjEDJfhj45JZnejkdh3445ERFskdhkedf')
-  ;
+;
 
-INSERT INTO LienCommunaute(description, CommunauteQuiDeclare, CommunauteConcernee) VALUES
+INSERT INTO LienCommunaute(description, communauteDeclarant, communauteConcernee) VALUES
 ('Les gens de la Vegancommunaute peuvent faire des séances de yoga avec la Yogacommunaute','Vegancommunaute','Yogacommunaute'),
 ('Les gens de la Yogacommunaute peuvent faire des séances de jardinage avec la Jardinagecommunaute','Yogacommunaute','Jardinagecommunaute'),
 ('Les gens de la Jardinagecommunaute peuvent donner des légumes à la Vegancommunaute','Jardinagecommunaute','Vegancommunaute')
@@ -127,4 +139,19 @@ INSERT INTO PersonneFaitPartieCommunaute(personne, communaute, exclu) VALUES
 ('matt', 'Jardinagecommunaute', '0'),
 ('mariaidrissi', 'Yogacommunaute', '0'),
 ('clementdupuis', 'Vegancommunaute', '0')
+;
+
+INSERT INTO SavoirFaire(nom, description) VALUES
+  ('jardinage', 'savoir faire pousser des plantes'),
+  ('cuisine', 'savoir faire pousser des plats'),
+  ('peinture', 'savoir peindre'),
+  ('nouage_de_lacets', 'savoir nouer ses lacets'),
+  ('navigation', 'savoir naviguer avec un bateau')
+;
+
+INSERT INTO PersonneDeclareSavoirFaire VALUES
+  ('matt', 'nouage_de_lacets', '0'),
+  ('matt', 'navigation', '5'),
+  ('matt', 'jardinage', '4'),
+  ('matt', 'cuisine', '4')
 ;
