@@ -211,6 +211,13 @@ INSERT INTO PersonneDeclareSavoirFaire VALUES
   ('matt', 'cuisine', '4')
 ;
 
+INSERT INTO CommunauteDeclareSavoirFaire VALUES
+  ('Jardinagecommunaute', 'jardinage', '5'),
+  ('Jardinagecommunaute', 'cuisine', '3'),
+  ('Vegancommunaute', 'jardinage', '2'),
+  ('Vegancommunaute', 'cuisine', '5')
+;
+
 INSERT INTO Vote(contre, dateVote, personneVotante, personneConcernee, communauteConcernee) VALUES
   (FALSE, '2020-03-04', 'mariaidrissi', 'matt', 'Yogacommunaute'),
   (TRUE, '2020-01-04', 'matt', 'mariaidrissi', 'Jardinagecommunaute'),
