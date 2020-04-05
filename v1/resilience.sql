@@ -93,6 +93,14 @@ CREATE TABLE Message (
   premiereRef INTEGER REFERENCES Message(id)
 );
 
+CREATE VIEW vueCommunaute (pseudo, communaute, exclu) AS
+SELECT F.personne, F.communaute, F.exclu
+FROM PersonneFaitPartieCommunaute F
+GROUP BY F.personne, F.communaute
+;
+
+
+
 INSERT INTO Compte VALUES
 ('8qQ7UhikRFZspgrnlmzaefeUNiJmAWmmSomuiomyui1x'),
 ('AhAnDkoiJNiHNhY3s5dBorCnDoFB5ojexuxZdzempooK'),
