@@ -1,5 +1,6 @@
 # NOTE DE CLARIFICATION
 Projet Résilience NA17
+Version 1 ─ 5 avril 2020
 
 ## Contexte
 Dans le cadre de l'uv NA17, les groupes de projets sont chargés de travailler sur le projet Résilience qui a pour but de créer une interface d'entraide et d'échange entre plusieurs personnes et communautés. Le projet permettra à chaque personne de pouvoir rajouter une communauté à la base de données, ajouter des liens entre les personnes ou entre les communautés, gérer les informations d'une communauté. L'objectif est que les personnes puissent rajouter des services et des savoirs-faires pour s'entraider entre communauté avec ou sans contrepartie. Les personnes pourront également s'échanger des messages et renseigner leur coordonnées géographiques.  
@@ -64,23 +65,26 @@ Les délais de rendu des livrables sont déjà déterminés sur la plateforme li
 
 ## Interprétation du problème et clarification
 
-Le projet Résilience est un réseau social constitué de personnes et de communautés.
+Le projet Résilience est l'implémentation d'un réseau social constitué de personnes et de communautés.
 
 Les personnes doivent pouvoir :
 * s'ajouter à la base de données (avec un pseudo unique, un nom, un prénom, une date de naissance)
 * créer des communautés
-* déclarer faire partie de communauté
+* déclarer faire partie d'une communauté.
+* voter pour ou contre la présence d'une personne dans la communauté
+Si plus de la moitié des membres de la communauté est opposé à la présence d'une autre personne, alors celle-ci ne fait plus partie de la communauté.
 * déclarer avoir des liens avec d'autres personnes (unidirectionnel)
 * gérer les informations de leur communauté, agir en tant que "la communauté"
-* être contre la présence d'une personne dans la communauté
 * ajouter un savoir-faire
 * posséder un compte en Ğ1
 * échanger des messages avec d'autres personnes et communauté
 * se localiser avec des coordonnés géographiques
+Les coordonnées géographiques sous un format du type 49.41957, 2.82377.
 
-Les communautés doivent pouvoir :
+Les communautés ont une date de création et une description. Elles doivent pouvoir :
 * ajouter un savoir-faire 
 * proposer un service
+* avoir une localisation, comme les personnes
 * posséder un compte en Ğ1
 * échanger des messages avec d'autres personnes et communauté
 * déclarer avoir des liens avec d'autres communautés (unidirectionnel)
@@ -94,9 +98,8 @@ La personne/communauté qui propose le service peut entrer dans la base les cont
 Cela peut être un montant en G1, un autre service, ou une autre chose à discuter.
 Si un élément n'est pas entré dans la base c'est qu'il n'est pas accepté en échange.
 
+Les personnes et communautés peuvent envoyer des messages à d'autres personnes ou communautés.
+Les messages ont un contenu (texte) et peuvent faire référence à un autre message.
 
-Contraintes générales :
-* Si plus de la moitié des membres de la communauté est opposé à la présence d'une autre personne, alors celle-ci ne fait plus partie de la communauté.
-* On stocke dans la base la liste des clés publiques des comptes en Ğ1.
-* Un message peut faire référence à un autre message.
-* Les coordonnées géographiques sous un format du type 49.41957, 2.82377.
+On stocke dans la base la liste des clés publiques des comptes G1 des personnes et communautés.
+
