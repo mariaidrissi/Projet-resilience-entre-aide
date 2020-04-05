@@ -53,7 +53,7 @@ Communaute "*" -- "*" SavoirFaire : déclare posséder >
 
 
 class Service{
-  Description : string
+  description : string
   aDiscuter : boolean
   montantG1 [0..1] : integer
 }
@@ -80,8 +80,5 @@ class Compte {
 }
 Personne "0..1" -- "0..1" Compte : possède >
 Communaute "0..1" -- "0..1" Compte : possède >
-note bottom of Compte
-    est possédé par Personne XOR est possédé par Communauté
-end note
 
 @enduml
