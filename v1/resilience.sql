@@ -124,5 +124,5 @@ INSERT INTO LienCommunaute(description, CommunauteQuiDeclare, CommunauteConcerne
 INSERT INTO PersonneFaitPartieCommunaute(personne, communaute, exclu) VALUES
 ('matt', 'Jardinagecommunaute', '0'),
 ('mariaidrissi', 'Yogacommunaute', '0'),
-('clementdupuis', 'Vegancommunaute', '0'),
+('clementdupuis', 'Vegancommunaute', '0')
 ;
